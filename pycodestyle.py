@@ -31,6 +31,6 @@ class AirbnbConsole(cmd.Cmd):
         'Print an error message for invalid commands.'
         print(f'Invalid command: {arg}. Type help or ? to list commands.')
 
+
 if __name__ == '__main__':
     AirbnbConsole().cmdloop()
-
