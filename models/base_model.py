@@ -1,80 +1,71 @@
 #!/usr/bin/python3
-"""
-Base class for all the other
-classes to inherit from
+"""Contains the BaseModel class
 """
 
-from uuid import uuid4
-from datetime import datetime
+
 import models
+import uuid
+import datetime
+
+
+date_fmt = "%Y-%m-%dT%H:%M:%S.%f"
+now = datetime.datetime.now()
 
 
 class BaseModel:
-    """Custom base for all the classes in project's models
-
-    Arttributes:
-        id(str): handles unique user identity
-        created_at: assigns current datetime
-        updated_at: updates current datetime
-
-    Methods:
-        __str__: prints the class name, id, and creates dictionary
-        representations of the inputed values
-        save(self): updates instance arttributes with current datetime
-        to_dict(self): returns the dictionary values of the instance obj
-
+    """Defines all common attributes/methods for other classes
     """
 
     def __init__(self, *args, **kwargs):
+        """BaseModel Class Constructor
         """
-        Instializes public instance artributes
+        if kwargs:
+            str_created_at = kwargs["created_at"]
+            str_updated_at = kwargs["updated_at"]
+            to_iso_created_at = datetime.datetime.strptime(
+                str_created_at, date_fmt
+            )
+            to_iso_updated_at = datetime.datetime.strptime(
+                str_updated_at, date_fmt
+            )
+            kwargs['created_at'] = to_iso_created_at
+            kwargs['updated_at'] = to_iso_updated_at
 
-        Args:
-            *args(args): arguments
-            **kwargs(dict): attrubute values
+            for k, v in kwargs.items():
+                if k != '__class__':
+                    setattr(self, k, v)
 
-        """
-        DATE_TIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
-        if not kwargs:
-            self.id = str(uuid4())
-            self.created_at = datetime.utcnow()
-            self.updated_at = datetime.utcnow()
-            models.storage.new(self)
         else:
-            for key, value in kwargs.items():
-                if key in ("updated_at", "created_at"):
-                    self.__dict__[key] = datetime.strptime(
-                        value, DATE_TIME_FORMAT)
-                elif key[0] == "id":
-                    self.__dict__[key] = str(value)
-                else:
-                    self.__dict__[key] = value
+            id = uuid.uuid4()
+            self.id = str(id)
+            self.created_at = now
+            self.updated_at = now
+            models.storage.new(self)
+            models.storage.save()
 
     def __str__(self):
+        """Returns a neatly formated string representation
         """
-        Returns string representation of the class
-        """
-        return "[{}] ({}) {}".format(self.__class__.__name__,
-                                     self.id, self.__dict__)
+        str_repr = "[{:s}] ({:s}) {}".format(
+            self.__class__.__name__,
+            self.id, self.__dict__)
+        return str_repr
 
     def save(self):
+        """Updates the public instance attribute updated_at\
+            with the current datetime
         """
-        Updates the public instance attribute:
-        'updated_at' - with the current datetime
-        """
-        self.updated_at = datetime.utcnow()
+        self.updated_at = now
         models.storage.save()
 
     def to_dict(self):
+        """ returns a dictionary containing all keys/values\
+            of __dict__ of the instance
         """
-        Method returns a dictionary containing all
-        keys/values of __dict__ instance
-        """
-        map_objects = {}
-        for key, value in self.__dict__.items():
-            if key == "created_at" or key == "updated_at":
-                map_objects[key] = value.isoformat()
-            else:
-                map_objects[key] = value
-        map_objects["__class__"] = self.__class__.__name__
-        return map_objects
+        my_dict = self.__dict__.copy()
+        iso_created_at = my_dict['created_at'].isoformat()
+        iso_updated_at = my_dict['updated_at'].isoformat()
+        my_dict['created_at'] = iso_created_at
+        my_dict['updated_at'] = iso_updated_at
+        my_dict["__class__"] = self.__class__.__name__
+        return (my_dict)
