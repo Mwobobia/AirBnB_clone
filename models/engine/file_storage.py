@@ -6,6 +6,7 @@ deserializes JSON types
 
 import json
 
+
 class FileStorage:
     """
     File storage class
