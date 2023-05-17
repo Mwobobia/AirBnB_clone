@@ -1,29 +1,11 @@
 #!/usr/bin/python3
-"""Entry point of the command interpreter module."""
+"""Module for the entry point of the command interpreter."""
 
 import cmd
-import os
-import re
-import json
-import shlex
-
-import models
 from models.base_model import BaseModel
 from models import storage
-from datetime import datetime
-from cmd import sys
-from models.user import User
-from models.amenity import Amenity
-from models.base_model import BaseModel
-from models.city import City
-from models.place import Place
-from models.review import Review
-from models.state import State
-
-classes = {
-    "BaseModel": BaseModel, "User": User, "State": State,
-    "City": City, "Amenity": Amenity, "Place": Place, "Review": Review
-}
+import re
+import json
 
 
 class HBNBCommand(cmd.Cmd):
@@ -234,4 +216,4 @@ class HBNBCommand(cmd.Cmd):
 
 
 if __name__ == '__main__':
-    HHNBCommand().cmdloop()
+    HBNBCommand().cmdloop()
