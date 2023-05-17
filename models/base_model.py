@@ -8,6 +8,7 @@ from uuid import uuid4
 from datetime import datetime
 import models
 
+
 class BaseModel:
     """Custom base for all the classes in project's models
 
@@ -66,7 +67,7 @@ class BaseModel:
 
     def to_dict(self):
         """
-        Method returns a dictionary containing all 
+        Method returns a dictionary containing all
         keys/values of __dict__ instance
         """
         map_objects = {}
