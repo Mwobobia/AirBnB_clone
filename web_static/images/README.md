@@ -1,2 +1,9 @@
 Images
 ![image](https://github.com/Mwobobia/AirBnB_clone/assets/111277935/72632594-572a-4618-ac0d-7f5566d28aa7)
+![image](https://github.com/Mwobobia/AirBnB_clone/assets/111277935/cdd29290-9e80-46ae-a32a-669770933a55)
+![image](https://github.com/Mwobobia/AirBnB_clone/assets/111277935/46fd3389-60cd-48a8-b4a8-b5865a89e043)
+![image](https://github.com/Mwobobia/AirBnB_clone/assets/111277935/d85bb736-2978-4286-9d20-a44bcdf7b020)
+![image](https://github.com/Mwobobia/AirBnB_clone/assets/111277935/a7a046b7-e084-4076-8f6a-d0d3dcd605c5)
+![image](https://github.com/Mwobobia/AirBnB_clone/assets/111277935/c07a43cd-c5ca-4d78-88b1-122c2abf2513)
+![image](https://github.com/Mwobobia/AirBnB_clone/assets/111277935/6f5f9ef1-eba9-47d1-abf5-d49ebdd7d957)
+![image](https://github.com/Mwobobia/AirBnB_clone/assets/111277935/838e39dd-8a36-4619-84c9-144dc7f5d585)
